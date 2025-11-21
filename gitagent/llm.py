@@ -2,11 +2,22 @@ import os
 import json
 import httpx
 from rich.console import Console
+from pathlib import Path
 
 from gitagent.prompt import PROMPT_TEMPLATE
 
 
 console = Console()
+
+env_path = Path(__file__).resolve().parents[1] / ".env"
+if env_path.exists():
+    for line in env_path.read_text().splitlines():
+        if line.strip() and not line.startswith("#"):
+            key, value = line.strip().split("=", 1)
+            os.environ[key] = value
+        else:
+            console.print("[red]Error: .env not found in the project root[/red]")
+
 
 def genetate_with_groq(diff):
     api_key = os.getenv("GROQ_API_KEY")

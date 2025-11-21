@@ -15,3 +15,5 @@ blah blah blah
 This AI Agent can help anyone wrighting and commiting code to github. 
 
 ## Contributing
+"# test gitagent" 
+"# test test" 
