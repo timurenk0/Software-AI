@@ -4,7 +4,7 @@ import httpx
 from rich.console import Console
 from pathlib import Path
 
-from gitagent.prompt import PROMPT_TEMPLATE
+from .prompt import PROMPT_TEMPLATE
 
 
 console = Console()
@@ -12,15 +12,18 @@ console = Console()
 env_path = Path(__file__).resolve().parents[1] / ".env"
 if env_path.exists():
     for line in env_path.read_text().splitlines():
-        if line.strip() and not line.startswith("#"):
-            key, value = line.strip().split("=", 1)
-            os.environ[key] = value
-        else:
-            console.print("[red]Error: .env not found in the project root[/red]")
+        line = line.strip()
+        if line and not line.startswith("#"):
+            key, value = line.split("=", 1)
+            os.environ[key.strip()] = value.strip()
+    console.print(f"[dim]Loaded .env from {env_path}[/dim]")
+else:
+    console.print(f"[red].env not found at {env_path}[/red]")
 
 
-def genetate_with_groq(diff):
+def generate_with_groq(diff):
     api_key = os.getenv("GROQ_API_KEY")
+    print(api_key)
     if not api_key:
         console.print("[red]Error: GROQ_API_KEY must be set in .env[/red]")
         raise ValueError("Missing GROQ_API_KEY")
@@ -28,10 +31,10 @@ def genetate_with_groq(diff):
     response = httpx.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={
-            "Authorization": f"Bearer {os.getenv("GROQ_API_KEY")}",
+            "Authorization": f"Bearer {api_key}",
         },
         json={
-            "model": "llama-3.1-70b-instant",
+            "model": "llama-3.1-8b-instant",
             "temperature": 0.2,
             "messages": [
                 {
