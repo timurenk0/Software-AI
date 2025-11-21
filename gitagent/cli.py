@@ -42,8 +42,8 @@ def run():
     push_new_branch(branch_name)
 
     console.print(Panel(
-        f"[bold green]Done![/bold green]\n\n",
-        f"Branch: [bold]{branch_name}[/bold]\n",
+        f"[bold green]Done![/bold green]\n\n"
+        f"Branch: [bold]{branch_name}[/bold]\n"
         f"Message:\n{commit_message}",
         title="gitagent success",
         expand=False
