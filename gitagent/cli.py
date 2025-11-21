@@ -3,7 +3,7 @@ from rich.console import Console
 from rich.panel import Panel
 from .diff_utils import get_full_diff, has_changes
 from .git_utils import create_and_switch_branch, add_all, commit, push_new_branch
-from .llm import genetate_with_groq
+from .llm import generate_with_groq
 from .prompt import PROMPT_TEMPLATE
 
 console = Console()
@@ -24,7 +24,7 @@ def run():
     prompt = PROMPT_TEMPLATE.format(diff=diff)
 
     try:
-        result = genetate_with_groq(prompt)
+        result = generate_with_groq(prompt)
         branch_name = result["branch_name"]
         commit_message = result["commit_message"]
     except Exception as e:
