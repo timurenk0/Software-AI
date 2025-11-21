@@ -1,5 +1,2 @@
-print("Hello world") 
-
-
-def incredible_function():
-    pass
+def password_hashing():
+    return "hashed password"
