@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+gitagent/__init__.py
+gitagent/cli.py
+gitagent/diff_utils.py
+gitagent/git_utils.py
+gitagent/llm.py
+gitagent/prompt.py
+gitagent.egg-info/PKG-INFO
+gitagent.egg-info/SOURCES.txt
+gitagent.egg-info/dependency_links.txt
+gitagent.egg-info/entry_points.txt
+gitagent.egg-info/requires.txt
+gitagent.egg-info/top_level.txt

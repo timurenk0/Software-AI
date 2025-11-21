@@ -1,0 +1,12 @@
+[project]
+name="gitagent"
+version="0.0.1"
+description="AI-powered git assistant"
+dependencies=[
+    "click>=8.0",
+    "rich",
+    "httpx"
+]
+
+[project.scripts]
+gitagent="gitagent.cli:cli"
