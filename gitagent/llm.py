@@ -30,7 +30,7 @@ def generate_with_groq(diff):
     response = httpx.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={
-            "Authorization": f"Bearer {os.getenv("GROQ_API_KEY")}",
+            "Authorization": f"Bearer {api_key}",
         },
         json={
             "model": "llama-3.1-70b-instant",
