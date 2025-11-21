@@ -1,0 +1,101 @@
+# Python virtual environment
+venv/
+env/
+.venv/
+ENV/
+env/
+venv*/
+.venv*/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Pip & pipenv
+pip-log.txt
+pip-delete-this-directory.txt
+pip-wheel-metadata/
+.pipcache/
+
+# Rope project settings
+.ropeproject
+
+# IDEs & Editors
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm / IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list/
+tramp
+.\#*
+
+# Vim
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Project-specific
+# Local config / secrets
+.env
+.env.local
+config.yaml
+secrets/
+
+# Test files / temporary
+test.txt
+*.log
+*.tmp
+*.bak
+
+# Optional: if you later add data or models
+models/
+data/
+*.bin
+*.gguf
+*.pth
+*.pt 

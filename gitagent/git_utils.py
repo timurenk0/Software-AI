@@ -35,5 +35,5 @@ def commit(message):
 
 
 def push_new_branch(branch_name):
-    console.print(f"[bold magent]Pushing branch {branch_name} and setting upstream...[/bold magenta]")
+    console.print(f"[bold magenta]Pushing branch {branch_name} and setting upstream...[/bold magenta]")
     run_git(["push", "--set-upstream", "origin", branch_name])
