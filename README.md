@@ -18,3 +18,4 @@ This AI Agent can help anyone wrighting and commiting code to github.
 "# test gitagent" 
 "# test test" 
 "52" 
+"bs" 
