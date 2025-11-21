@@ -23,7 +23,6 @@ else:
 
 def generate_with_groq(diff):
     api_key = os.getenv("GROQ_API_KEY")
-    print(api_key)
     if not api_key:
         console.print("[red]Error: GROQ_API_KEY must be set in .env[/red]")
         raise ValueError("Missing GROQ_API_KEY")
