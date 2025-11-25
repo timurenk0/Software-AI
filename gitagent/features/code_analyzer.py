@@ -5,16 +5,15 @@ from gitagent.llm import generate_with_groq
 from gitagent.utils.get_difference import get_difference
 
 console = Console()
-diff = get_difference()
 
 
 
 class CodeAnalyzer:
 
     @staticmethod
-    def get_modified_files():
+    def get_modified_files(diff):
         files = {}
-        current_file = None
+        current_file = None 
         lines = diff.splitlines()
 
         for line in lines:
@@ -40,7 +39,9 @@ class CodeAnalyzer:
     
 
     def review_changes(self):
-        files_content = self.get_modified_files()
+        diff = get_difference()
+        
+        files_content = self.get_modified_files(diff)
         if not files_content:
             return { "issues": [], "summary": "No changes detected" }
         
