@@ -6,9 +6,9 @@ from gitagent.agent_features.commit_generator import CommitGenerator
 def cli():
     pass
 
-# @cli.command()
-# def run():
-#     CommitGenerator().generate()
+@cli.command()
+def run():
+    CommitGenerator().generate()
 
 @cli.command()
 def sosal():
