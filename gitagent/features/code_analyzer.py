@@ -11,7 +11,6 @@ from gitagent.utils.get_difference import get_difference
 console = Console()
 
 
-
 class CodeAnalyzer:
     def get_modified_files(self, diff):
         files = {}
@@ -92,8 +91,8 @@ class CodeAnalyzer:
            severity = issue.get("severity", "low").lower()
            color = {
                "critical": "bold red",
-               "high": "bold orange",
-               "medium": "yellow",
+               "high": "bold yellow",
+               "medium": "cyan",
                "low": "dim"
            }.get(severity, "white")
 
@@ -106,11 +105,11 @@ class CodeAnalyzer:
         console.print(table)
 
         risk_level = "CRITICAL" if critical_count else "HIGH RISK" if high_count else "Review Needed"
-        color = "bold red" if critical_count else "bold orange" if high_count else "yellow"
+        color = "bold red" if critical_count else "bold cyan" if high_count else "yellow"
 
         console.print(Panel(
             f"[{color}]{risk_level}[/{color}]\n\n"
-            f"[bold]Total issues:[/bold] {len(issues)}"
+            f"[bold]Total issues:[/bold] {len(issues)}\n"
             f"[bold]Critical:[/bold] {critical_count} | [bold]High:[/bold] {high_count}\n\n"
             f"[dim]{summary}[/dim]",
             title="AI Review Summary",
@@ -121,7 +120,9 @@ class CodeAnalyzer:
             if not console.input("[bold red]Continue with commit anyway? (y/n)[/bold red]").strip().lower() == "y":
                 console.print("[white]Commit aborted by AI safety check[/white]")
                 return
-            
+            else:
+                console.print("[red]Potentially critical changes approved by user. Proceeding...[/red]") 
+                return
         else:
             if console.input("[bold yellow]Continue? (y/n)[/bold yellow]").strip().lower() == "y":
                 pass
@@ -130,3 +131,4 @@ class CodeAnalyzer:
                 return
         
         console.print("[bold green]AI approved. Proceeding...[/bold green]")
+  
