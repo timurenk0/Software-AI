@@ -1,4 +1,4 @@
-PROMPT_TEMPLATE = """
+PROMPT_COMMIT = """
 You are an expert software engineer writing perfect git commit messages and branch names.
 
 Given the following git diff, perform two tasks:

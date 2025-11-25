@@ -4,8 +4,6 @@ import httpx
 from rich.console import Console
 from pathlib import Path
 
-from .prompt import PROMPT_TEMPLATE
-
 
 console = Console()
 
@@ -21,7 +19,7 @@ else:
     console.print(f"[red].env not found at {env_path}[/red]")
 
 
-def generate_with_groq(diff):
+def generate_with_groq(prompt):
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
         console.print("[red]Error: GROQ_API_KEY must be set in .env[/red]")
@@ -42,7 +40,7 @@ def generate_with_groq(diff):
                 },
                 {
                     "role": "user",
-                    "content": PROMPT_TEMPLATE.format(diff=diff[:120000])
+                    "content": prompt
                 }
             ]
         },
