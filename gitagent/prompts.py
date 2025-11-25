@@ -25,3 +25,39 @@ Respond in JSON only:
     "commit_message": "string"
 }}
 """
+PROMPT_REVIEW = """
+You are a senior Python code reviewer with 15+ years of experience.
+
+Review ONLY the modified files below for:
+- Real bugs (wrong logic, exceptions, edge cases)
+- Security issues
+- Performance problems
+- Anti-patterns
+- Unused variables/imports
+- Type mismatches
+- Missing error handling
+
+DO NOT flag:
+- print() statements (may be intentional)
+- TODO/FIXME (unless critical)
+- Style issues (we have linters)
+
+Modified files and their full content:
+
+{files_content}
+
+Diff:
+{diff}
+
+Respond in JSON:
+{
+  "issues": [
+    {
+      "severity": "critical|high|medium|low",
+      "file": "path/to/file.py",
+      "description": "Clear explanation of the real problem"
+    }
+  ],
+  "summary": "All good" or "Found X potential issues"
+}
+"""

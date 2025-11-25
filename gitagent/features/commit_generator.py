@@ -1,45 +1,24 @@
-import subprocess
 from rich.console import Console
 from rich.panel import Panel
 from datetime import datetime
+
+from gitagent.utils.get_difference import get_difference, has_changes
 from gitagent.llm import generate_with_groq
-from gitagent.git_utils import create_and_switch_branch, add_all, commit, push_new_branch
+from gitagent.utils.git_utils import create_and_switch_branch, add_all, commit, push_new_branch
 from gitagent.prompts import PROMPT_COMMIT
 
 console = Console()
 
-class CommitGenerator():
-    @staticmethod
-    def get_difference():
-        unstaged = subprocess.run(
-            ["git", "diff", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=False
-        )
-
-        staged = subprocess.run(
-            ["git", "diff", "--staged", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=False
-        )
-
-        return unstaged.stdout + staged.stdout
-    
-    @staticmethod
-    def has_changes():
-        return len(CommitGenerator.get_difference().strip()) > 0
-    
+class CommitGenerator():    
     def generate(self):
-        if not self.has_changes():
+        if not has_changes():
             console.print("[bold yellow]No changes detected. You're up to date.[/bold yellow]")
             return
 
         console.print(Panel("[gray]Agent is thinking...[/gray]"))
         
-        diff = self.get_difference()
-        prompt = PROMPT_COMMIT.format(diff=diff)
+        diff = get_difference()
+        prompt = PROMPT_COMMIT.format(diff=diff[:50000])
 
         try:
             result = generate_with_groq(prompt)
