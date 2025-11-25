@@ -10,9 +10,5 @@ def cli():
 def run():
     CommitGenerator().generate()
 
-@cli.command()
-def sosal():
-    CommitGenerator().generate()
-
 if __name__ == "__main__":
     cli()
