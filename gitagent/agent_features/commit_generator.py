@@ -39,6 +39,7 @@ class CommitGenerator():
         console.print(Panel("[gray]Agent is thinking...[/gray]"))
         
         diff = self.get_difference()
+        print(f"difference: {diff}")
         prompt = PROMPT_COMMIT.format(diff=diff)
 
         try:
