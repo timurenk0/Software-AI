@@ -49,15 +49,15 @@ Modified files and their full content:
 Diff:
 {diff}
 
-Respond in JSON:
-{
+Respond in VALID JSON ONLY:
+{{
   "issues": [
-    {
+    {{
       "severity": "critical|high|medium|low",
       "file": "path/to/file.py",
       "description": "Clear explanation of the real problem"
-    }
+    }}
   ],
   "summary": "All good" or "Found X potential issues"
-}
+}}
 """

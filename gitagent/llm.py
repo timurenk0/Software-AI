@@ -33,6 +33,10 @@ def generate_with_groq(prompt):
         json={
             "model": "llama-3.1-8b-instant",
             "temperature": 0.2,
+            "max_tokens": 1024,
+            "response_format": {
+                "type": "json_object"
+            },
             "messages": [
                 {
                     "role": "system",
@@ -47,5 +51,19 @@ def generate_with_groq(prompt):
         timeout=30
     )
     response.raise_for_status()
-    content = response.json()["choices"][0]["message"]["content"]
-    return json.loads(content)
+    content = response.json()["choices"][0]["message"]["content"].strip()
+
+    start = content.find("{")
+    end = content.rfind("}") + 1
+    if start == -1 or end == 0:
+        console.print(f"[red]No JSON found in response:[/red]\n{content}")
+        raise ValueError("No JSON in response")
+
+    json_str = content[start:end]
+
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError as e:
+        console.print(f"[red]Invalid JSON:[/red] {e}")
+        console.print(f"[yellow]Raw response:[/yellow]\n{json_str}")
+        raise    
