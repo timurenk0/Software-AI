@@ -18,24 +18,16 @@ The agent monitors modified files, evaluates potential risks, identifies the int
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/<your-username>/<your-repository>.git
-cd <your-repository>
+git clone https://github.com/timurenk0/Software-AI.git
+cd Software-AI
 ```
 
 2. **Install dependencies**
-(Choose the correct example depending on your project)
 
 ### Python:
 ```bash
 pip install -r requirements.txt
 ```
-
-### Node.js:
-```bash
-npm install
-```
-
----
 
 ## ▶️ Usage
 
@@ -44,10 +36,6 @@ npm install
 python main.py
 ```
 
-### Node.js:
-```bash
-node index.js
-```
 
 The agent will:
 
