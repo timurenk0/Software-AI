@@ -1,18 +1,80 @@
-# Git AI Agent
+# Git Auto-Agent
+An intelligent Git assistant that automatically analyzes code changes, generates commit metadata, and pushes updates to a new branch for safe review.  
+The agent monitors modified files, evaluates potential risks, identifies the intent behind changes, and performs smart version-control automation.
 
-## Overview
-This is a small helper AI agent that keeps tracks of your working directory and automatically sumamrizes, categorizes and commits all of editing done so you don't have to focus on such a mundane task.
+---
 
-## Installation
-For a quick video guide follow this link to a youtube video guide.
+## 🚀 Features
+- 🔍 **Automatic change detection** — Scans modified files in your project.
+- 🤖 **AI-powered change analysis** — Identifies intent, risk level, and potential breakages.
+- 📝 **Auto-generated commit messages & branch names** using LLM reasoning.
+- 🌿 **Automatic branch creation** — Pushes work to a separate branch for human review.
+- 🛡️ **Conflict & dependency analysis** (optional extensions).
+- 🐞 **Bug-risk detector** (optional extensions).
 
-For those who stayed here, copy the git repo to a desired directory,
-blah blah blah
+---
 
-(nice bash script here)
+## 📦 Installation
 
-## Usage
-This AI Agent can help anyone wrighting and commiting code to github. 
+1. **Clone the repository**
+```bash
+git clone https://github.com/<your-username>/<your-repository>.git
+cd <your-repository>
+```
 
-## Contributing
-AI review functionality test
+2. **Install dependencies**
+(Choose the correct example depending on your project)
+
+### Python:
+```bash
+pip install -r requirements.txt
+```
+
+### Node.js:
+```bash
+npm install
+```
+
+---
+
+## ▶️ Usage
+
+### Python:
+```bash
+python main.py
+```
+
+### Node.js:
+```bash
+node index.js
+```
+
+The agent will:
+
+1. Scan the repository for modified or new files  
+2. Analyze changes using AI  
+3. Generate:  
+   - intent report  
+   - risk assessment  
+   - recommended actions  
+   - commit message  
+   - branch name  
+4. Commit the changes  
+5. Push them to a new branch on your remote repository  
+
+You can then open GitHub to review and merge the generated branch.
+
+---
+
+## 🤝 Contributing
+Contributions are welcome!  
+To contribute:
+
+1. Fork the repository  
+2. Create a feature branch  
+3. Commit your changes  
+4. Open a pull request  
+
+Feel free to open issues for feature requests or bug reports.
+
+---
