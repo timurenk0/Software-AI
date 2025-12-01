@@ -1,0 +1,14 @@
+anyio==4.11.0
+certifi==2025.11.12
+click==8.3.1
+colorama==0.4.6
+-e git+https://github.com/timurenk0/Software-AI.git@75e997c5c1658675dcb459143e12a428cd4225ec#egg=gitagent
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.11
+markdown-it-py==4.0.0
+mdurl==0.1.2
+Pygments==2.19.2
+rich==14.2.0
+sniffio==1.3.1

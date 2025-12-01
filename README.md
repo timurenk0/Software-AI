@@ -33,8 +33,10 @@ pip install -r requirements.txt
 
 ### Python:
 ```bash
-python main.py
+gitagent <available_command>
 ```
+
+You can check all available commands in cli.py file. The function names are the commands
 
 
 The agent will:
