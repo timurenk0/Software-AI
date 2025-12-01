@@ -61,3 +61,28 @@ Respond in VALID JSON ONLY:
   "summary": "All good" or "Found X potential issues"
 }}
 """
+PROMPT_RESOLVE = """
+You are an autonomous senior developer fixing real GitHub issues of ones project repository.
+
+Issue: #{issue_number}
+Title: {issue_title}
+Body: {issue_body}
+Labels: {issue_labels}
+
+Your job: Generate ONLY the correct code changes needed to fully resolve the issue.
+
+Rules:
+1. Return full file contents (not patches) for every file that must be changed
+2. Do NOT explain - only return JSON
+3. If no code change is needed, return empty "changes"
+4. Be precide and production-ready
+
+
+Respond in VALID JSON ONLY:
+{{
+  "changes": {{
+    "path/to/file.py": "<full new file content>",
+    "another/file.py": "<full new file content>",
+  }}
+}}
+"""
