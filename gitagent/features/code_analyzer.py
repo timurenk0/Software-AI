@@ -127,7 +127,7 @@ class CodeAnalyzer:
             if console.input("[bold yellow]Continue? (y/n)[/bold yellow]").strip().lower() == "y":
                 pass
             else:
-                console.print("[white]Review accepted but commit rejected bu user[/white]")
+                console.print("[white]Review accepted but commit rejected by user[/white]")
                 return
         
         console.print("[bold green]AI approved. Proceeding...[/bold green]")

@@ -66,19 +66,21 @@ class IssueResolver:
             table.add_column("#", style="dim", width=4)
             table.add_column("Title", style="bold white", width=50)
             table.add_column("Description", style="white")
+            table.add_column("Opened by", style="dim")
 
             for issue in open_issues:
                 title = issue.title.strip()
                 body = (issue.body or "No description").strip().replace("\n", " ").replace("\r", " ")
                 
-                # Truncate long descriptions gracefully
+                # Truncate long descriptions
                 if len(body) > 120:
                     body = body[:117] + "..."
 
                 table.add_row(
                     f"[cyan]#{issue.number}[/cyan]",
                     title,
-                    f"{body}"
+                    f"{body}",
+                    f"{issue.user.login}"
                 )
 
             console.print(table)

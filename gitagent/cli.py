@@ -21,7 +21,11 @@ def issues():
     IssueResolver().get_issues()
 
 @cli.command()
-@click.argument("issue_number")
+@click.argument(
+    "issue_number",
+    type=click.INT,
+    required=True
+)
 def resolve(issue_number):
     IssueResolver().resolve_issue(issue_number)
 
