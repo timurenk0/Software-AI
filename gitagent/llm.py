@@ -2,23 +2,12 @@ import os
 import json
 import httpx
 from rich.console import Console
-from pathlib import Path
+from dotenv import load_dotenv
 
 
 console = Console()
 
-env_path = Path(__file__).resolve().parents[1] / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#"):
-            key, value = line.split("=", 1)
-            os.environ[key.strip()] = value.strip()
-    console.print(f"[dim]Loaded .env from {env_path}[/dim]")
-else:
-    console.print(f"[red].env not found at {env_path}[/red]")
-
-
+load_dotenv()
 def generate_with_groq(prompt):
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
