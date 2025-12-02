@@ -2,9 +2,12 @@ import os
 import subprocess
 from pathlib import Path
 from github import Github
+from github import Auth
 
 from rich.console import Console
 from rich.panel import Panel
+from rich.table import Table
+from rich import box
 
 from gitagent.llm import generate_with_groq
 from gitagent.prompts import PROMPT_RESOLVE
@@ -18,19 +21,79 @@ class IssueResolver:
             console.print("[red]Error: GITHUB_TOKEN not set in .env[/red]")
             raise ValueError("Missing .env variable")
         
-        self.gh = Github(token)
+        auth = Auth.Token(token)
+        self.gh = Github(auth=auth)
+        self.repo_name = ""
+        self.repo = {}
 
         try:
             origin = subprocess.check_output(["git", "remote", "get-url", "origin"]).decode().strip()
-            repo_name = origin.split("github.com")[-1].replace(".git", "").strip(":")
-            if repo_name.endswith("/"):
-                repo_name = repo_name[:-1]
-        
+            self.repo_name = origin.split("github.com")[-1].replace(".git", "").strip("/")
+            
+
         except:
             raise ValueError("Failed to detect project repository. Set a remote url leading to your Github repository first")
         
-        self.repo = self.gh.get_repo(repo_name)
-    
+        print(self.repo_name)
+        self.repo = self.gh.get_repo(self.repo_name)
+
+
+    def get_issues(self):
+        try:
+            open_issues = list(self.repo.get_issues(state="open"))[:10]
+
+            if not open_issues:
+                console.print(Panel(
+                    "[bold green]No open issues found![/bold green]\n\n"
+                    "You're all caught up — excellent work!",
+                    title="GitHub Issues",
+                    border_style="green",
+                    padding=(1, 2)
+                ))
+                return
+            
+                
+            table = Table(
+                title=f"[bold magenta]Open Issues — {self.repo.full_name or self.repo_name}[/bold magenta]",
+                show_header=True,
+                header_style="bold cyan",
+                box=box.ROUNDED,
+                border_style="bright_blue",
+                title_style="bold white on #1e1e2e",
+                padding=(0, 1)
+            )
+
+            table.add_column("#", style="dim", width=4)
+            table.add_column("Title", style="bold white", width=50)
+            table.add_column("Description", style="white")
+
+            for issue in open_issues:
+                title = issue.title.strip()
+                body = (issue.body or "No description").strip().replace("\n", " ").replace("\r", " ")
+                
+                # Truncate long descriptions gracefully
+                if len(body) > 120:
+                    body = body[:117] + "..."
+
+                table.add_row(
+                    f"[cyan]#{issue.number}[/cyan]",
+                    title,
+                    f"{body}"
+                )
+
+            console.print(table)
+
+            if len(open_issues) >= 10:
+                console.print(f"[dim]Showing first 10 issues • Use GitHub for full list[/dim]")   
+            
+        
+        except Exception as e:
+            console.print(Panel(
+                f"[red]Failed to load issues[/red]\n\n"
+                f"Error: ${e}\n",
+                title="API Error",
+                border_style="red"
+            ))
 
     def resolve_issue(self, issue_number):
         issue = self.repo.get_issue(number=issue_number)
@@ -81,5 +144,5 @@ class IssueResolver:
             applied+=1
         
         console.print(Panel(
-            f"[bold green]Fix applied successfully!"
+            f"[bold green]Fix applied successfully![/bold green]"
         ))
