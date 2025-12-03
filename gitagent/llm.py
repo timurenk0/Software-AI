@@ -36,7 +36,7 @@ def generate_with_groq(prompt):
         json={
             "model": "llama-3.1-8b-instant",
             "temperature": 0.2,
-            "max_tokens": 1024,
+            "max_tokens": 4096,
             "response_format": {
                 "type": "json_object"
             },

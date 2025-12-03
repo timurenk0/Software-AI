@@ -1,19 +1,5 @@
-import subprocess
-
 def get_difference():
-    unstaged = subprocess.run(
-        ["git", "diff", "HEAD"],
-        capture_output=True,
-        text=True,
-        check=False
-    )
-
-    staged = subprocess.run(
-        ["git", "diff", "--staged", "HEAD"],
-        capture_output=True,
-        text=True,
-        check=False
-    )
+    # ... (rest of the file remains the same)
 
     return unstaged.stdout + staged.stdout
 

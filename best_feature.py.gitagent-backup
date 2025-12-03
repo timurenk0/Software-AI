@@ -1,0 +1,3 @@
+def best_feature():
+    a = 10
+    return a

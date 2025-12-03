@@ -69,6 +69,9 @@ Title: {issue_title}
 Body: {issue_body}
 Labels: {issue_labels}
 
+Project context (files + content):
+{project_context}
+
 Your job: Generate ONLY the correct code changes needed to fully resolve the issue.
 
 Rules:
@@ -85,4 +88,24 @@ Respond in VALID JSON ONLY:
     "another/file.py": "<full new file content>",
   }}
 }}
+"""
+PROMPT_RESOLVE_HELPER = """
+You are an expert Python developer.
+
+Issue #{issue_number}: {issue_title}
+Description: {issue_body}
+
+Here are all Python files in the project (no content yet):
+{self._list_python_files()}
+
+Your task: Return ONLY the file paths (one per line) that are MOST LIKELY involved in fixing this issue.
+Be conservative. Max 6 files. Only production code — no tests, no __pycache__.
+
+Examples:
+gitagent/cli.py
+gitagent/features/issue_resolver.py
+gitagent/llm.py
+
+Respond with file paths only:
+"path/to/file.py"
 """
