@@ -61,3 +61,45 @@ Respond in VALID JSON ONLY:
   "summary": "All good" or "Found X potential issues"
 }}
 """
+PROMPT_FILE_SELECTION="""
+You are an exprt Python engineer.
+
+Issue:
+Title: {title}
+Body:
+{body}
+Labels: {labels}
+
+Available files:
+{files_list}
+
+Task: Return ONLY the files that need to be changed to fix this issue.
+Max 8 files. If < 75 percent sure, return fewer or empty. 
+
+Return valid JSON only:
+{{
+  "files": ["list", "of", "paths.py"],
+  "confidence": 85,
+  "reasoning": "short explanation"
+}}
+"""
+PROMPT_RESOLVE="""
+You are an expert GitHub issue resolver in Python.
+
+Issue #{issue_number}: {title}
+{body}
+
+You must fix it by editing ONLY these files:
+
+{files_with_content}
+
+Return valid JSON with full new content for each file:
+
+{{
+  "files": {{
+    "src/to/file.py": "full new file content",
+    "src/to/file.py": "full new file content"
+  }},
+  "explanation": "What you changed and why"
+}}
+"""
