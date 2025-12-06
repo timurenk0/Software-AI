@@ -133,5 +133,5 @@ class IssueResolver:
         
 
         console.print(f"[bold green]Applied changes to {len(fix["files"])} files[/bold green]")
-        console.print(f"[dim]Explanation: ${fix.get("explanation", "No explanation")}[/dim]")
+        console.print(f"[dim]Explanation: {fix.get("explanation", "No explanation")}[/dim]")
         return True

@@ -1,2 +1,2 @@
 def some_test():
-    return "some test"
+    return 'Test passed successfully'

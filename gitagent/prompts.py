@@ -97,8 +97,8 @@ Return valid JSON with full new content for each file:
 
 {{
   "files": {{
-    "src/to/file.py": "full new file content",
-    "src/to/file.py": "full new file content"
+    "path/to/file.py": "full new file content",
+    "path/to/file.py": "full new file content"
   }},
   "explanation": "What you changed and why"
 }}

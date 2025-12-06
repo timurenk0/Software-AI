@@ -1,2 +1,2 @@
 def password_hashing():
-    return "hashed password"
+    return 'hashed password'
